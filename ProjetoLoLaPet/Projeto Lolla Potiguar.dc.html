@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Grand+Hotel&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  html,body{margin:0;padding:0}
+  body{background:#F3E6CF;font-family:'Hanken Grotesk',sans-serif;color:#3D241A;-webkit-font-smoothing:antialiased}
+  ::selection{background:#FEBD02;color:#3A2317}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  [data-rv]{opacity:0;transform:translateY(30px);transition:opacity .85s cubic-bezier(.2,.7,.2,1),transform .85s cubic-bezier(.2,.7,.2,1)}
+  [data-rv].rv-in{opacity:1;transform:none}
+  .nav-link{transition:color .25s,border-color .25s}
+  .nav-link:hover{color:#FC4C73}
+  .nav-link.nav-on{color:#FC4C73}
+  .car-track{scrollbar-width:none;-ms-overflow-style:none}
+  .car-track::-webkit-scrollbar{display:none}
+  .gcard{transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s}
+  .gcard:hover{transform:translateY(-6px)}
+  .pbtn{transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s,background .25s}
+  .pbtn:hover{transform:translateY(-3px)}
+  .sv-row{transition:background .25s}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+  @keyframes pulseheart{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+  @keyframes bobdown{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+  .lb-fade{animation:lbin .35s ease both}
+  @keyframes lbin{from{opacity:0}to{opacity:1}}
+  .wm{position:relative}
+  .wm::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Ctext x='8' y='118' transform='rotate(-28 150 100)' font-family='Arial,sans-serif' font-size='15.5' font-weight='700' fill='%23000' fill-opacity='0.6'%3ESACHA FARIAS DESIGNER · AMOSTRA%3C/text%3E%3C/svg%3E");background-size:300px 200px;opacity:.22;mix-blend-mode:multiply;border-radius:inherit;z-index:5}
+  img{-webkit-user-drag:none;user-select:none}
+</style>
+</helmet>
+
+<!-- ================= NAV ================= -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:60;backdrop-filter:blur(10px);background:rgba(251,241,223,.86);border-bottom:1px solid rgba(201,150,47,.28)">
+  <div style="max-width:1200px;margin:0 auto;padding:11px 26px;display:flex;align-items:center;gap:18px">
+    <a data-nav="inicio" style="display:flex;align-items:center;gap:11px;cursor:pointer">
+      <img src="assets/lolla-logo.png" alt="Lolla Potiguar" style="width:42px;height:42px;object-fit:contain">
+      <span style="font-family:'DM Serif Display',serif;font-size:19px;color:#3A2317;line-height:1">Lolla Potiguar</span>
+    </a>
+    <div style="flex:1"></div>
+    <div style="display:flex;align-items:center;gap:26px">
+      <a data-nav="identidade" class="nav-link" style="font-size:13.5px;font-weight:600;letter-spacing:.02em;color:#6B3F2B;cursor:pointer">Identidade</a>
+      <a data-nav="estrategia" class="nav-link" style="font-size:13.5px;font-weight:600;letter-spacing:.02em;color:#6B3F2B;cursor:pointer">Estratégia</a>
+      <a data-nav="galeria" class="nav-link" style="font-size:13.5px;font-weight:600;letter-spacing:.02em;color:#6B3F2B;cursor:pointer">Galeria</a>
+      <a data-nav="servicos" class="nav-link" style="font-size:13.5px;font-weight:600;letter-spacing:.02em;color:#6B3F2B;cursor:pointer">Serviços</a>
+      <a data-nav="investimento" class="nav-link" style="font-size:13.5px;font-weight:600;letter-spacing:.02em;color:#6B3F2B;cursor:pointer">Investimento</a>
+      <a data-nav="contato" class="pbtn" style="display:inline-flex;align-items:center;gap:8px;background:#FC4C73;color:#fff;font-size:13px;font-weight:700;padding:9px 17px;border-radius:999px;cursor:pointer;box-shadow:0 8px 18px rgba(252,76,115,.28)">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15l-1.4 5 5.1-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.5-2.6-1.1-4.3-3.7-4.4-3.9-.1-.2-1-1.4-1-2.6 0-1.2.6-1.8.9-2 .2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.3 0 .5l-.4.6c-.2.2-.3.4-.1.7.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.2.1.4 0 .6Z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<section id="inicio" data-screen-label="Início" data-label="Início" style="position:relative;padding:96px 22px 60px;display:flex;flex-direction:column;align-items:center">
+  <div data-rv style="width:100%;max-width:1120px;margin:0 auto 22px;background:#3A2317;border:1px solid #C9962F;border-radius:16px;padding:15px 22px;display:flex;align-items:flex-start;gap:14px">
+    <div style="flex:none;width:38px;height:38px;border-radius:10px;background:rgba(254,189,2,.14);display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="19" fill="none" stroke="#FEBD02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+    <div>
+      <div style="font-weight:800;font-size:12.5px;letter-spacing:.08em;color:#FEBD02;text-transform:uppercase">Material confidencial · Uso não autorizado</div>
+      <p style="font-size:13px;line-height:1.55;margin:5px 0 0;color:rgba(255,248,236,.86)">Esta apresentação — artes, identidade visual e estratégia — é uma <strong>amostra protegida</strong>. Nenhum conteúdo está autorizado para uso, reprodução, publicação ou divulgação <strong>antes da assinatura do contrato</strong>. © Sacha Farias Designer — todos os direitos reservados.</p>
+    </div>
+  </div>
+  <div style="position:relative;width:100%;max-width:1120px;background:#FFF8EC;border-radius:26px;box-shadow:0 30px 70px rgba(58,35,23,.16);overflow:hidden;border:1px solid rgba(201,150,47,.3)">
+    <!-- gold inset frame -->
+    <div style="position:absolute;inset:14px;border:1.5px solid rgba(201,150,47,.5);border-radius:16px;pointer-events:none;z-index:3"></div>
+    <div style="position:absolute;inset:20px;border:1px solid rgba(201,150,47,.22);border-radius:12px;pointer-events:none;z-index:3"></div>
+    <!-- wave corners -->
+    <svg width="330" height="230" viewBox="0 0 330 230" style="position:absolute;top:0;left:0;z-index:2">
+      <path d="M0 0 H330 C245 28 230 70 162 104 C108 130 58 172 0 206 Z" fill="#3A2317"/>
+      <path d="M0 0 H292 C220 36 205 78 147 110 C98 138 52 174 0 196 Z" fill="#08B3BB"/>
+      <path d="M0 0 H254 C195 44 182 86 135 116 C92 142 46 178 0 184 Z" fill="#FC4C73"/>
+      <path d="M0 0 H218 C170 52 158 92 124 122 C86 148 42 180 0 172 Z" fill="#FEBD02"/>
+    </svg>
+    <svg width="330" height="230" viewBox="0 0 330 230" style="position:absolute;bottom:0;right:0;z-index:2;transform:rotate(180deg)">
+      <path d="M0 0 H330 C245 28 230 70 162 104 C108 130 58 172 0 206 Z" fill="#3A2317"/>
+      <path d="M0 0 H292 C220 36 205 78 147 110 C98 138 52 174 0 196 Z" fill="#08B3BB"/>
+      <path d="M0 0 H254 C195 44 182 86 135 116 C92 142 46 178 0 184 Z" fill="#FC4C73"/>
+      <path d="M0 0 H218 C170 52 158 92 124 122 C86 148 42 180 0 172 Z" fill="#FEBD02"/>
+    </svg>
+    <!-- watermarks -->
+    <svg viewBox="0 0 64 64" style="position:absolute;top:120px;right:90px;width:96px;color:#EBD9B8;opacity:.6;z-index:1" fill="currentColor"><ellipse cx="32" cy="44" rx="15" ry="12"/><ellipse cx="13" cy="28" rx="6.5" ry="7.5"/><ellipse cx="25" cy="18" rx="6.5" ry="7.5"/><ellipse cx="39" cy="18" rx="6.5" ry="7.5"/><ellipse cx="51" cy="28" rx="6.5" ry="7.5"/></svg>
+    <svg viewBox="0 0 32 29" style="position:absolute;bottom:120px;left:70px;width:60px;color:#F0DFC4;opacity:.7;z-index:1" fill="currentColor"><path d="M16 29S0 18 0 8A8 8 0 0 1 16 6 8 8 0 0 1 32 8c0 10-16 21-16 21Z"/></svg>
+
+    <div style="position:relative;z-index:4;padding:62px 56px 56px;text-align:center">
+      <div style="display:inline-flex;align-items:center;gap:12px;color:#08B3BB;font-size:12px;font-weight:800;letter-spacing:.26em;text-transform:uppercase">
+        <span style="width:30px;height:1px;background:#C9962F;display:inline-block"></span>
+        Proposta &amp; Apresentação de Projeto
+        <span style="width:30px;height:1px;background:#C9962F;display:inline-block"></span>
+      </div>
+
+      <div style="margin:26px auto 6px;width:184px;animation:floaty 5s ease-in-out infinite">
+        <img src="assets/lolla-logo.png" alt="Lolla Potiguar Pet Shop" style="width:184px;height:184px;object-fit:contain;filter:drop-shadow(0 16px 24px rgba(58,35,23,.18))">
+      </div>
+
+      <div style="font-family:'Grand Hotel',cursive;font-size:34px;color:#08B3BB;line-height:1;margin-top:4px">Cuidado premium que vira família</div>
+      <h1 style="font-family:'DM Serif Display',serif;font-weight:400;font-size:72px;line-height:1.02;margin:12px 0 0;color:#3A2317;letter-spacing:-.01em">Lolla Potiguar <span style="color:#FC4C73">Pet Shop</span></h1>
+      <p style="max-width:660px;margin:20px auto 0;font-size:18.5px;line-height:1.6;color:#6B3F2B">Estratégia, identidade e conteúdo para construir <strong>presença digital</strong>, gerar desejo e formar uma <strong>lista de espera</strong> real antes da inauguração — em Natal/RN.</p>
+
+      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:26px">
+        <span style="background:#FFE7EE;color:#d63a63;font-size:13px;font-weight:700;padding:8px 16px;border-radius:999px">Banho &amp; Tosa Premium</span>
+        <span style="background:#E2F6F7;color:#0A8A90;font-size:13px;font-weight:700;padding:8px 16px;border-radius:999px">Ponta Negra · Natal/RN</span>
+        <span style="background:#FFF3CF;color:#9a7400;font-size:13px;font-weight:700;padding:8px 16px;border-radius:999px">Inauguração em ~60 dias</span>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:34px">
+        <a data-nav="galeria" class="pbtn" style="display:inline-flex;align-items:center;gap:9px;background:#3A2317;color:#FFF8EC;font-size:15px;font-weight:700;padding:14px 26px;border-radius:999px;cursor:pointer;box-shadow:0 14px 28px rgba(58,35,23,.26)">Ver o projeto
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#FEBD02" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a data-nav="investimento" class="pbtn" style="display:inline-flex;align-items:center;gap:9px;background:#fff;color:#3A2317;font-size:15px;font-weight:700;padding:14px 26px;border-radius:999px;cursor:pointer;border:1.5px solid #E7D3AE">Ver investimento</a>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:18px;justify-content:center;margin-top:42px;padding-top:26px;border-top:1px dashed rgba(201,150,47,.4)">
+        <div style="text-align:left"><div style="font-size:10.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#08B3BB">Preparado por</div><div style="font-family:'DM Serif Display',serif;font-size:21px;color:#3A2317;margin-top:2px">Sacha Farias <span style="font-size:14px;color:#C9962F;font-family:'Hanken Grotesk';font-weight:700">Designer</span></div></div>
+      <div style="width:1px;background:rgba(201,150,47,.4)"></div>
+        <div style="text-align:left"><div style="font-size:10.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#FC4C73">Para</div><div style="font-family:'DM Serif Display',serif;font-size:21px;color:#3A2317;margin-top:2px">Pierro &amp; Edna <span style="font-size:14px;color:#8A6F60;font-family:'Hanken Grotesk';font-weight:600">· sócios-fundadores</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= IDENTIDADE ================= -->
+<section id="identidade" data-screen-label="Identidade Visual" data-label="Identidade" style="position:relative;padding:74px 22px;background:#FBF1DF">
+  <div style="max-width:1120px;margin:0 auto">
+    <div data-rv style="text-align:center;margin-bottom:46px">
+      <div style="display:inline-flex;align-items:center;gap:12px;color:#FC4C73;font-size:12px;font-weight:800;letter-spacing:.24em;text-transform:uppercase"><span style="width:26px;height:1px;background:#C9962F"></span>Manual de Identidade<span style="width:26px;height:1px;background:#C9962F"></span></div>
+      <h2 style="font-family:'DM Serif Display',serif;font-size:46px;color:#3A2317;margin:12px 0 0;line-height:1.05">A marca, do jeito certo</h2>
+      <p style="max-width:600px;margin:14px auto 0;font-size:16.5px;line-height:1.6;color:#6B3F2B">Cores, tipografia e versões oficiais — a base visual que mantém a Lolla <strong>consistente, reconhecível e premium</strong> em qualquer aplicação.</p>
+    </div>
+
+    <!-- paleta -->
+    <div data-rv style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:18px">
+      <div style="background:#fff;border:1px solid #EFE2D2;border-radius:18px;overflow:hidden;box-shadow:0 10px 26px rgba(58,35,23,.06)">
+        <div style="height:118px;background:#FC4C73;display:flex;align-items:flex-end;padding:14px"><svg viewBox="0 0 32 29" width="30" fill="rgba(255,255,255,.85)"><path d="M16 29S0 18 0 8A8 8 0 0 1 16 6 8 8 0 0 1 32 8c0 10-16 21-16 21Z"/></svg></div>
+        <div style="padding:16px 18px"><div style="font-family:'DM Serif Display',serif;font-size:22px;color:#3A2317">#FC4C73</div><div style="font-size:12.5px;color:#8A6F60;margin-top:3px">RGB 252, 76, 115 · CMYK 0, 81, 32, 0</div></div>
+      </div>
+      <div style="background:#fff;border:1px solid #EFE2D2;border-radius:18px;overflow:hidden;box-shadow:0 10px 26px rgba(58,35,23,.06)">
+        <div style="height:118px;background:#08B3BB;display:flex;align-items:flex-end;padding:14px"><svg viewBox="0 0 64 64" width="32" fill="rgba(255,255,255,.85)"><ellipse cx="32" cy="44" rx="15" ry="12"/><ellipse cx="13" cy="28" rx="6.5" ry="7.5"/><ellipse cx="25" cy="18" rx="6.5" ry="7.5"/><ellipse cx="39" cy="18" rx="6.5" ry="7.5"/><ellipse cx="51" cy="28" rx="6.5" ry="7.5"/></svg></div>
+        <div style="padding:16px 18px"><div style="font-family:'DM Serif Display',serif;font-size:22px;color:#3A2317">#08B3BB</div><div style="font-size:12.5px;color:#8A6F60;margin-top:3px">RGB 8, 179, 187 · CMYK 74, 0, 30, 0</div></div>
+      </div>
+      <div style="background:#fff;border:1px solid #EFE2D2;border-radius:18px;overflow:hidden;box-shadow:0 10px 26px rgba(58,35,23,.06)">
+        <div style="height:118px;background:#FEBD02;display:flex;align-items:flex-end;padding:14px"><svg viewBox="0 0 64 40" width="34" fill="rgba(255,255,255,.9)"><path d="M14 8c4-6 14-6 18 0 3 5 14 3 16 10 2 7-6 14-14 12-6-2-10-2-16 0-8 2-16-5-14-12 1-5 6-7 10-10Z"/></svg></div>
+        <div style="padding:16px 18px"><div style="font-family:'DM Serif Display',serif;font-size:22px;color:#3A2317">#FEBD02</div><div style="font-size:12.5px;color:#8A6F60;margin-top:3px">RGB 254, 189, 2 · CMYK 0, 29, 93, 0</div></div>
+      </div>
+    </div>
+
+    <div data-rv style="display:grid;grid-template-columns:1.05fr 1fr;gap:18px;margin-bottom:18px">
+      <!-- tipografia -->
+      <div style="background:#fff;border:1px solid #EFE2D2;border-radius:18px;padding:26px 28px;box-shadow:0 10px 26px rgba(58,35,23,.06)">
+        <div style="font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#08B3BB;margin-bottom:16px">Tipografia</div>
+        <div style="display:flex;align-items:center;gap:16px;padding-bottom:16px;border-bottom:1px dashed #E7D3AE">
+          <div style="flex:none;width:56px;height:56px;border-radius:50%;border:1.5px solid #FC4C73;display:flex;align-items:center;justify-content:center;font-family:'Grand Hotel',cursive;font-size:26px;color:#FC4C73">Aa</div>
+          <div><div style="font-size:11.5px;font-weight:700;color:#0A8A90;letter-spacing:.04em">PRINCIPAL</div><div style="font-family:'Grand Hotel',cursive;font-size:34px;color:#3A2317;line-height:1">Righton Script</div><div style="font-size:12px;color:#8A6F60">Títulos, assinaturas e acentos afetivos</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;padding-top:16px">
+          <div style="flex:none;width:56px;height:56px;border-radius:50%;border:1.5px solid #08B3BB;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px;color:#08B3BB">Aa</div>
+          <div><div style="font-size:11.5px;font-weight:700;color:#0A8A90;letter-spacing:.04em">APOIO</div><div style="font-weight:800;font-size:25px;color:#3A2317;line-height:1.1">Alte Haas Grotesk</div><div style="font-size:12px;color:#8A6F60">Textos, legendas e interface</div></div>
+        </div>
+      </div>
+      <!-- assinaturas -->
+      <div style="background:#3A2317;border-radius:18px;padding:26px 28px;color:#FFF8EC;position:relative;overflow:hidden">
+        <svg viewBox="0 0 64 64" style="position:absolute;right:-14px;bottom:-14px;width:140px;color:rgba(255,248,236,.06)" fill="currentColor"><ellipse cx="32" cy="44" rx="15" ry="12"/><ellipse cx="13" cy="28" rx="6.5" ry="7.5"/><ellipse cx="25" cy="18" rx="6.5" ry="7.5"/><ellipse cx="39" cy="18" rx="6.5" ry="7.5"/><ellipse cx="51" cy="28" rx="6.5" ry="7.5"/></svg>
+        <div style="font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#FEBD02;margin-bottom:14px">Frases-assinatura da marca</div>
+        <div style="font-family:'Grand Hotel',cursive;font-size:30px;color:#FC4C73;line-height:1.1">Amor que acolhe</div>
+        <div style="font-family:'Grand Hotel',cursive;font-size:30px;color:#08B3BB;line-height:1.1;margin-top:4px">Qualidade que cuida</div>
+        <div style="font-family:'Grand Hotel',cursive;font-size:30px;color:#FEBD02;line-height:1.1;margin-top:4px">Confiança que fideliza</div>
+        <p style="font-size:13px;line-height:1.55;color:rgba(255,248,236,.78);margin:16px 0 0">A Lolla, dachshund dos sócios, é a garota-propaganda e o fio afetivo de toda a comunicação.</p>
+      </div>
+    </div>
+
+    <!-- versões -->
+    <div data-rv>
+      <div style="font-family:'DM Serif Display',serif;font-size:22px;color:#3A2317;margin:8px 0 14px">Versões oficiais da marca</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+        <div class="gcard" data-lb="man" data-i="3" style="cursor:zoom-in;background:#fff;border:1px solid #EFE2D2;border-radius:16px;padding:14px;text-align:center;box-shadow:0 8px 20px rgba(58,35,23,.06)"><div style="background:#FFF8EC;border-radius:10px;padding:10px"><img src="assets/lolla-logo.png" style="height:104px;margin:0 auto;object-fit:contain"></div><div style="font-size:12px;font-weight:700;color:#3A2317;margin-top:10px">Principal</div></div>
+        <div class="gcard" data-lb="man" data-i="3" style="cursor:zoom-in;background:#fff;border:1px solid #EFE2D2;border-radius:16px;padding:14px;text-align:center;box-shadow:0 8px 20px rgba(58,35,23,.06)"><div style="background:#3A2317;border-radius:10px;padding:10px"><img src="assets/lolla-logo.png" style="height:104px;margin:0 auto;object-fit:contain"></div><div style="font-size:12px;font-weight:700;color:#3A2317;margin-top:10px">Fundo escuro</div></div>
+        <div class="gcard" data-lb="man" data-i="3" style="cursor:zoom-in;background:#fff;border:1px solid #EFE2D2;border-radius:16px;padding:14px;text-align:center;box-shadow:0 8px 20px rgba(58,35,23,.06)"><div style="background:#E2F6F7;border-radius:10px;padding:10px"><img src="assets/lolla-logo.png" style="height:104px;margin:0 auto;object-fit:contain"></div><div style="font-size:12px;font-weight:700;color:#3A2317;margin-top:10px">Sobre cor</div></div>
+        <div class="gcard" data-lb="man" data-i="3" style="cursor:zoom-in;background:linear-gradient(135deg,#FC4C73,#08B3BB);border-radius:16px;padding:1.5px;text-align:center;box-shadow:0 8px 20px rgba(58,35,23,.1)"><div style="background:#fff;border-radius:15px;padding:13px;height:100%"><div style="background:#FFF3CF;border-radius:10px;padding:10px"><img src="assets/lolla-logo.png" style="height:104px;margin:0 auto;object-fit:contain"></div><div style="font-size:12px;font-weight:700;color:#3A2317;margin-top:10px">Reduzida</div></div></div>
+      </div>
+      <p style="font-size:13px;color:#8A6F60;margin:14px 0 0;text-align:center">O manual completo está na galeria abaixo. <strong style="color:#6B3F2B">Clique para ampliar.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ESTRATÉGIA ================= -->
+<section id="estrategia" data-screen-label="Estratégia" data-label="Estratégia" style="position:relative;padding:74px 22px;background:#FFF8EC">
+  <div style="max-width:1120px;margin:0 auto">
+    <div data-rv style="text-align:center;margin-bottom:44px">
+      <div style="display:inline-flex;align-items:center;gap:12px;color:#08B3BB;font-size:12px;font-weight:800;letter-spacing:.24em;text-transform:uppercase"><span style="width:26px;height:1px;background:#C9962F"></span>Briefing Estratégico<span style="width:26px;height:1px;background:#C9962F"></span></div>
+      <h2 style="font-family:'DM Serif Display',serif;font-size:46px;color:#3A2317;margin:12px 0 0;line-height:1.05">O plano por trás de cada post</h2>
+      <p style="max-width:640px;margin:14px auto 0;font-size:16.5px;line-height:1.6;color:#6B3F2B">Não é postar por postar. É preparar o mercado de Natal para <strong>conhecer, desejar e confiar</strong> na Lolla antes mesmo de a porta abrir.</p>
+    </div>
+
+    <!-- objetivo callout -->
+    <div data-rv style="background:#3A2317;border-radius:22px;padding:34px 38px;color:#FFF8EC;position:relative;overflow:hidden;margin-bottom:20px">
+      <svg viewBox="0 0 32 29" style="position:absolute;right:30px;top:-10px;width:150px;color:rgba(252,76,115,.16)" fill="currentColor"><path d="M16 29S0 18 0 8A8 8 0 0 1 16 6 8 8 0 0 1 32 8c0 10-16 21-16 21Z"/></svg>
+      <div style="font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#FEBD02">Objetivo do período pré-inauguração</div>
+      <p style="font-family:'DM Serif Display',serif;font-size:27px;line-height:1.32;margin:12px 0 0;max-width:760px;position:relative">Transformar curiosidade em <span style="color:#FC4C73">intenção de compra</span> — gerar expectativa, visibilidade regional e uma lista de espera qualificada, pronta para agendar nos primeiros dias.</p>
+    </div>
+
+    <!-- contexto + posicionamento -->
+    <div data-rv style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:20px">
+      <div style="background:#fff;border:1px solid #EFE2D2;border-radius:18px;padding:26px;box-shadow:0 10px 26px rgba(58,35,23,.06)">
+        <div style="font-family:'DM Serif Display',serif;font-size:21px;color:#3A2317;margin-bottom:14px">Contexto</div>
+        <div style="display:flex;flex-direction:column;gap:13px">
+          <div style="display:flex;gap:12px"><div style="flex:none;width:34px;height:34px;border-radius:9px;background:#FFE7EE;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="17" fill="none" stroke="#FC4C73" stroke-width="2"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/></svg></div><div><div style="font-weight:700;font-size:14px;color:#3A2317">Negócio em implantação</div><p style="font-size:13px;line-height:1.45;color:#6B3F2B;margin:2px 0 0">Inauguração em ~60 dias. A janela pré-abertura é o ativo mais valioso — e perecível.</p></div></div>
+          <div style="display:flex;gap:12px"><div style="flex:none;width:34px;height:34px;border-radius:9px;background:#E2F6F7;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="17" fill="none" stroke="#08B3BB" stroke-width="2" stroke-linecap="round"><path d="M14 4 7 11M5 9l4 4M3 21l6-6"/><circle cx="17" cy="7" r="3"/></svg></div><div><div style="font-weight:700;font-size:14px;color:#3A2317">Serviço-âncora</div><p style="font-size:13px;line-height:1.45;color:#6B3F2B;margin:2px 0 0">Banho &amp; tosa premium como carro-chefe. Hotel e creche no roteiro futuro.</p></div></div>
+          <div style="display:flex;gap:12px"><div style="flex:none;width:34px;height:34px;border-radius:9px;background:#FFF3CF;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="17" fill="none" stroke="#9a7400" stroke-width="2" stroke-linecap="round"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg></div><div><div style="font-weight:700;font-size:14px;color:#3A2317">Praça premium</div><p style="font-size:13px;line-height:1.45;color:#6B3F2B;margin:2px 0 0">Ponta Negra, Natal/RN — público A/B, forte cultura pet, disposto a pagar por experiência.</p></div></div>
+        </div>
+      </div>
+      <div style="background:#fff;border:1px solid #EFE2D2;border-radius:18px;padding:26px;box-shadow:0 10px 26px rgba(58,35,23,.06)">
+        <div style="font-family:'DM Serif Display',serif;font-size:21px;color:#3A2317;margin-bottom:8px">Posicionamento</div>
+        <p style="font-size:14px;line-height:1.55;color:#6B3F2B;margin:0 0 14px">Dois universos que se completam: o <strong>premium e sofisticado</strong> (qualidade, higiene, cuidado especializado) e o <strong>fofo e afetivo</strong> (a Lolla criando proximidade e simpatia).</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
+          <span style="background:#FFF3E4;color:#6B3F2B;font-size:12.5px;font-weight:600;padding:6px 13px;border-radius:999px">Cuidado premium</span>
+          <span style="background:#E2F6F7;color:#0A8A90;font-size:12.5px;font-weight:600;padding:6px 13px;border-radius:999px">Acolhedor</span>
+          <span style="background:#FFE7EE;color:#d63a63;font-size:12.5px;font-weight:600;padding:6px 13px;border-radius:999px">De confiança</span>
+          <span style="background:#FFF3CF;color:#9a7400;font-size:12.5px;font-weight:600;padding:6px 13px;border-radius:999px">Local &amp; afetivo</span>
+        </div>
+        <div style="background:#FBF1DF;border-radius:12px;padding:13px 15px"><div style="font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#08B3BB;margin-bottom:3px">Público-alvo</div><p style="font-size:13px;line-height:1.45;color:#6B3F2B;margin:0">Tutor-família de 25–50 anos que trata o cão como gente da casa, e tutores de raças que exigem tosa recorrente.</p></div>
+      </div>
+    </div>
+
+    <!-- canais -->
+    <div data-rv style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px">
+      <div style="background:#fff;border:1px solid #EFE2D2;border-top:4px solid #FC4C73;border-radius:16px;padding:22px"><div style="font-weight:800;font-size:16px;color:#3A2317">Instagram</div><div style="font-size:12px;color:#0A8A90;font-weight:700;margin:2px 0 8px">Casa principal · autoridade</div><p style="font-size:13px;line-height:1.5;color:#6B3F2B;margin:0">Feed, Stories e Reels. Vitrine premium, captação de lista de espera e canal do tráfego pago.</p></div>
+      <div style="background:#fff;border:1px solid #EFE2D2;border-top:4px solid #08B3BB;border-radius:16px;padding:22px"><div style="font-weight:800;font-size:16px;color:#3A2317">TikTok</div><div style="font-size:12px;color:#0A8A90;font-weight:700;margin:2px 0 8px">Alcance regional · humanização</div><p style="font-size:13px;line-height:1.5;color:#6B3F2B;margin:0">Reels nativos para alcançar Natal organicamente, com a Lolla como isca de atenção.</p></div>
+      <div style="background:#fff;border:1px solid #EFE2D2;border-top:4px solid #FEBD02;border-radius:16px;padding:22px"><div style="font-weight:800;font-size:16px;color:#3A2317">Tráfego pago</div><div style="font-size:12px;color:#0A8A90;font-weight:700;margin:2px 0 8px">Meta Ads · captação</div><p style="font-size:13px;line-height:1.5;color:#6B3F2B;margin:0">Impulso inicial para visibilidade regional e captação de interessados antes da abertura.</p></div>
+    </div>
+
+    <!-- stats -->
+    <div data-rv style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px">
+      <div style="background:#FFE7EE;border-radius:16px;padding:20px;text-align:center"><div data-count="60" style="font-family:'DM Serif Display',serif;font-size:42px;color:#FC4C73;line-height:1">0</div><div style="font-size:12.5px;font-weight:700;color:#6B3F2B;margin-top:4px">dias até a inauguração</div></div>
+      <div style="background:#E2F6F7;border-radius:16px;padding:20px;text-align:center"><div data-count="12" style="font-family:'DM Serif Display',serif;font-size:42px;color:#0A8A90;line-height:1">0</div><div style="font-size:12.5px;font-weight:700;color:#6B3F2B;margin-top:4px">Reels por mês</div></div>
+      <div style="background:#FFF3CF;border-radius:16px;padding:20px;text-align:center"><div data-count="1" data-suffix="+" style="font-family:'DM Serif Display',serif;font-size:42px;color:#9a7400;line-height:1">0</div><div style="font-size:12.5px;font-weight:700;color:#6B3F2B;margin-top:4px">story por dia</div></div>
+      <div style="background:#FBE4D4;border-radius:16px;padding:20px;text-align:center"><div data-count="2" style="font-family:'DM Serif Display',serif;font-size:42px;color:#6B3F2B;line-height:1">0</div><div style="font-size:12.5px;font-weight:700;color:#6B3F2B;margin-top:4px">redes ativas</div></div>
+    </div>
+
+    <!-- processo -->
+    <div data-rv style="background:#FBF1DF;border:1px solid #EFE2D2;border-radius:20px;padding:28px 30px">
+      <div style="font-family:'DM Serif Display',serif;font-size:21px;color:#3A2317;margin-bottom:18px">Cronograma de ~60 dias</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0">
+        <div style="position:relative;padding-right:14px"><div style="display:flex;align-items:center;gap:8px"><span style="width:14px;height:14px;border-radius:50%;background:#FC4C73"></span><span style="flex:1;height:2px;background:#E7D3AE"></span></div><div style="font-weight:800;font-size:13px;color:#FC4C73;margin-top:10px">Semanas 1–2</div><div style="font-weight:700;font-size:14px;color:#3A2317;margin-top:2px">Fundação</div><p style="font-size:12.5px;line-height:1.45;color:#6B3F2B;margin:4px 0 0">Aprovação do briefing, linha editorial e setup dos perfis.</p></div>
+        <div style="position:relative;padding-right:14px"><div style="display:flex;align-items:center;gap:8px"><span style="width:14px;height:14px;border-radius:50%;background:#08B3BB"></span><span style="flex:1;height:2px;background:#E7D3AE"></span></div><div style="font-weight:800;font-size:13px;color:#0A8A90;margin-top:10px">Semanas 3–5</div><div style="font-weight:700;font-size:14px;color:#3A2317;margin-top:2px">Aquecimento</div><p style="font-size:12.5px;line-height:1.45;color:#6B3F2B;margin:4px 0 0">1ª captação com a Lolla, bastidores da obra, início da lista de espera.</p></div>
+        <div style="position:relative;padding-right:14px"><div style="display:flex;align-items:center;gap:8px"><span style="width:14px;height:14px;border-radius:50%;background:#FEBD02"></span><span style="flex:1;height:2px;background:#E7D3AE"></span></div><div style="font-weight:800;font-size:13px;color:#9a7400;margin-top:10px">Semanas 6–7</div><div style="font-weight:700;font-size:14px;color:#3A2317;margin-top:2px">Reta final</div><p style="font-size:12.5px;line-height:1.45;color:#6B3F2B;margin:4px 0 0">Tráfego pago no ar, contagem regressiva, aceleração da lista.</p></div>
+        <div style="position:relative"><div style="display:flex;align-items:center;gap:8px"><span style="width:14px;height:14px;border-radius:50%;background:#3A2317"></span></div><div style="font-weight:800;font-size:13px;color:#6B3F2B;margin-top:10px">Semana 8+</div><div style="font-weight:700;font-size:14px;color:#3A2317;margin-top:2px">Inauguração</div><p style="font-size:12.5px;line-height:1.45;color:#6B3F2B;margin:4px 0 0">Ativação da lista, cobertura do dia e transição para gestão mensal.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GALERIA ================= -->
+<section id="galeria" data-screen-label="Galeria" data-label="Galeria" style="position:relative;padding:78px 22px;background:#2A1810;overflow:hidden">
+  <svg viewBox="0 0 64 64" style="position:absolute;top:40px;left:40px;width:120px;color:rgba(255,248,236,.04)" fill="currentColor"><ellipse cx="32" cy="44" rx="15" ry="12"/><ellipse cx="13" cy="28" rx="6.5" ry="7.5"/><ellipse cx="25" cy="18" rx="6.5" ry="7.5"/><ellipse cx="39" cy="18" rx="6.5" ry="7.5"/><ellipse cx="51" cy="28" rx="6.5" ry="7.5"/></svg>
+  <div style="max-width:1180px;margin:0 auto;position:relative">
+    <div data-rv style="text-align:center;margin-bottom:40px">
+      <div style="display:inline-flex;align-items:center;gap:12px;color:#FEBD02;font-size:12px;font-weight:800;letter-spacing:.24em;text-transform:uppercase"><span style="width:26px;height:1px;background:#C9962F"></span>Galeria do Projeto<span style="width:26px;height:1px;background:#C9962F"></span></div>
+      <h2 style="font-family:'DM Serif Display',serif;font-size:46px;color:#FFF8EC;margin:12px 0 0;line-height:1.05">As peças, na prática</h2>
+      <p style="max-width:620px;margin:14px auto 0;font-size:16.5px;line-height:1.6;color:rgba(255,248,236,.72)">Tudo que já foi produzido para a marca — carrossel de apresentação, briefing estratégico e manual de identidade. <strong style="color:#FEBD02">Clique em qualquer peça para ampliar.</strong></p>
+    </div>
+
+    <!-- carrossel apresentação -->
+    <div data-rv style="margin-bottom:46px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+        <div><div style="font-family:'DM Serif Display',serif;font-size:24px;color:#FFF8EC">Carrossel · Apresentação da Marca</div><div style="font-size:13px;color:rgba(255,248,236,.6)">6 telas · formato Instagram</div></div>
+        <div style="display:flex;gap:10px">
+          <button data-car="apr" data-dir="-1" class="pbtn" style="width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,248,236,.25);background:rgba(255,248,236,.06);color:#FFF8EC;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center">‹</button>
+          <button data-car="apr" data-dir="1" class="pbtn" style="width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,248,236,.25);background:rgba(255,248,236,.06);color:#FFF8EC;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center">›</button>
+        </div>
+      </div>
+      <div id="car-apr" class="car-track" style="display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 12px">
+        <div class="gcard" data-lb="car" data-i="0" style="flex:none;width:268px;scroll-snap-align:start;cursor:zoom-in;border-radius:16px;overflow:hidden;box-shadow:0 16px 34px rgba(0,0,0,.4)"><img src="assets/arte/car-1.jpg" loading="lazy" style="width:100%"></div>
+        <div class="gcard" data-lb="car" data-i="1" style="flex:none;width:268px;scroll-snap-align:start;cursor:zoom-in;border-radius:16px;overflow:hidden;box-shadow:0 16px 34px rgba(0,0,0,.4)"><img src="assets/arte/car-2.jpg" loading="lazy" style="width:100%"></div>
+        <div class="gcard" data-lb="car" data-i="2" style="flex:none;width:268px;scroll-snap-align:start;cursor:zoom-in;border-radius:16px;overflow:hidden;box-shadow:0 16px 34px rgba(0,0,0,.4)"><img src="assets/arte/car-3.jpg" loading="lazy" style="width:100%"></div>
+        <div class="gcard" data-lb="car" data-i="3" style="flex:none;width:268px;scroll-snap-align:start;cursor:zoom-in;border-radius:16px;overflow:hidden;box-shadow:0 16px 34px rgba(0,0,0,.4)"><img src="assets/arte/car-4.jpg" loading="lazy" style="width:100%"></div>
+        <div class="gcard" data-lb="car" data-i="4" style="flex:none;width:268px;scroll-snap-align:start;cursor:zoom-in;border-radius:16px;overflow:hidden;box-shadow:0 16px 34px rgba(0,0,0,.4)"><img src="assets/arte/car-5.jpg" loading="lazy" style="width:100%"></div>
+        <div class="gcard" data-lb="car" data-i="5" style="flex:none;width:268px;scroll-snap-align:start;cursor:zoom-in;border-radius:16px;overflow:hidden;box-shadow:0 16px 34px rgba(0,0,0,.4)"><img src="assets/arte/car-6.jpg" loading="lazy" style="width:100%"></div>
+      </div>
+    </div>
+
+    <!-- briefing peças -->
+    <div data-rv style="margin-bottom:46px">
+      <div style="margin-bottom:16px"><div style="font-family:'DM Serif Display',serif;font-size:24px;color:#FFF8EC">Briefing Estratégico · Peças</div><div style="font-size:13px;color:rgba(255,248,236,.6)">6 páginas · contexto a processo de trabalho</div></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+        <div class="gcard" data-lb="brief" data-i="0" style="cursor:zoom-in;border-radius:14px;overflow:hidden;box-shadow:0 14px 30px rgba(0,0,0,.38)"><img src="assets/arte/brief-1.jpg" loading="lazy" style="width:100%"></div>
+        <div class="gcard" data-lb="brief" data-i="1" style="cursor:zoom-in;border-radius:14px;overflow:hidden;box-shadow:0 14px 30px rgba(0,0,0,.38)"><img src="assets/arte/brief-2.jpg" loading="lazy" style="width:100%"></div>
+        <div class="gcard" data-lb="brief" data-i="2" style="cursor:zoom-in;border-radius:14px;overflow:hidden;box-shadow:0 14px 30px rgba(0,0,0,.38)"><img src="assets/arte/brief-3.jpg" loading="lazy" style="width:100%"></div>
+        <div class="gcard" data-lb="brief" data-i="3" style="cursor:zoom-in;border-radius:14px;overflow:hidden;box-shadow:0 14px 30px rgba(0,0,0,.38)"><img src="assets/arte/brief-4.jpg" loading="lazy" style="width:100%"></div>
+        <div class="gcard" data-lb="brief" data-i="4" style="cursor:zoom-in;border-radius:14px;overflow:hidden;box-shadow:0 14px 30px rgba(0,0,0,.38)"><img src="assets/arte/brief-5.jpg" loading="lazy" style="width:100%"></div>
+        <div class="gcard" data-lb="brief" data-i="5" style="cursor:zoom-in;border-radius:14px;overflow:hidden;box-shadow:0 14px 30px rgba(0,0,0,.38)"><img src="assets/arte/brief-6.jpg" loading="lazy" style="width:100%"></div>
+      </div>
+    </div>
+
+    <!-- manual -->
+    <div data-rv>
+      <div style="margin-bottom:16px"><div style="font-family:'DM Serif Display',serif;font-size:24px;color:#FFF8EC">Manual de Identidade Visual</div><div style="font-size:13px;color:rgba(255,248,236,.6)">capa, tipografia, essência, versões e área de proteção</div></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+        <div class="gcard" data-lb="man" data-i="0" style="cursor:zoom-in;border-radius:14px;overflow:hidden;box-shadow:0 14px 30px rgba(0,0,0,.38)"><img src="assets/arte/man-1.jpg" loading="lazy" style="width:100%"></div>
+        <div class="gcard" data-lb="man" data-i="1" style="cursor:zoom-in;border-radius:14px;overflow:hidden;box-shadow:0 14px 30px rgba(0,0,0,.38)"><img src="assets/arte/man-2.jpg" loading="lazy" style="width:100%"></div>
+        <div class="gcard" data-lb="man" data-i="2" style="cursor:zoom-in;border-radius:14px;overflow:hidden;box-shadow:0 14px 30px rgba(0,0,0,.38)"><img src="assets/arte/man-3.jpg" loading="lazy" style="width:100%"></div>
+        <div class="gcard" data-lb="man" data-i="3" style="cursor:zoom-in;border-radius:14px;overflow:hidden;box-shadow:0 14px 30px rgba(0,0,0,.38)"><img src="assets/arte/man-4.jpg" loading="lazy" style="width:100%"></div>
+        <div class="gcard" data-lb="man" data-i="4" style="cursor:zoom-in;border-radius:14px;overflow:hidden;box-shadow:0 14px 30px rgba(0,0,0,.38)"><img src="assets/arte/man-5.jpg" loading="lazy" style="width:100%"></div>
+        <div class="gcard" data-lb="man" data-i="5" style="cursor:zoom-in;border-radius:14px;overflow:hidden;box-shadow:0 14px 30px rgba(0,0,0,.38)"><img src="assets/arte/man-6.jpg" loading="lazy" style="width:100%"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVIÇOS ================= -->
+<section id="servicos" data-screen-label="Serviços" data-label="Serviços" style="position:relative;padding:74px 22px;background:#FBF1DF">
+  <div style="max-width:1120px;margin:0 auto">
+    <div data-rv style="text-align:center;margin-bottom:42px">
+      <div style="display:inline-flex;align-items:center;gap:12px;color:#FC4C73;font-size:12px;font-weight:800;letter-spacing:.24em;text-transform:uppercase"><span style="width:26px;height:1px;background:#C9962F"></span>Serviços<span style="width:26px;height:1px;background:#C9962F"></span></div>
+      <h2 style="font-family:'DM Serif Display',serif;font-size:46px;color:#3A2317;margin:12px 0 0;line-height:1.05">Como posso ajudar a Lolla a crescer</h2>
+      <p style="max-width:640px;margin:14px auto 0;font-size:16.5px;line-height:1.6;color:#6B3F2B">O serviço principal é a <strong>gestão de redes sociais</strong>. Em volta dele, soluções complementares que organizam, profissionalizam e aceleram o lançamento.</p>
+    </div>
+
+    <!-- core -->
+    <div data-rv style="background:#3A2317;border-radius:22px;padding:32px 36px;color:#FFF8EC;display:grid;grid-template-columns:1.2fr 1fr;gap:26px;align-items:center;margin-bottom:26px;position:relative;overflow:hidden">
+      <svg viewBox="0 0 64 64" style="position:absolute;right:-10px;bottom:-16px;width:150px;color:rgba(254,189,2,.08)" fill="currentColor"><ellipse cx="32" cy="44" rx="15" ry="12"/><ellipse cx="13" cy="28" rx="6.5" ry="7.5"/><ellipse cx="25" cy="18" rx="6.5" ry="7.5"/><ellipse cx="39" cy="18" rx="6.5" ry="7.5"/><ellipse cx="51" cy="28" rx="6.5" ry="7.5"/></svg>
+      <div style="position:relative">
+        <div style="display:inline-block;background:#FEBD02;color:#3A2317;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 13px;border-radius:999px">Serviço principal</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:32px;margin:14px 0 8px">Gestão de Redes Sociais</div>
+        <p style="font-size:14.5px;line-height:1.6;color:rgba(255,248,236,.82);margin:0">Estratégia, linha editorial, design das artes, captação com a Lolla, produção de Reels, stories diários, publicação e relatórios. Tudo no padrão da marca, do briefing à inauguração.</p>
+      </div>
+      <div style="position:relative;display:flex;flex-wrap:wrap;gap:9px">
+        <span style="background:rgba(255,248,236,.1);font-size:12.5px;font-weight:600;padding:8px 13px;border-radius:999px">Planejamento</span>
+        <span style="background:rgba(255,248,236,.1);font-size:12.5px;font-weight:600;padding:8px 13px;border-radius:999px">Design de artes</span>
+        <span style="background:rgba(255,248,236,.1);font-size:12.5px;font-weight:600;padding:8px 13px;border-radius:999px">Reels &amp; Stories</span>
+        <span style="background:rgba(255,248,236,.1);font-size:12.5px;font-weight:600;padding:8px 13px;border-radius:999px">Captação Lolla</span>
+        <span style="background:rgba(255,248,236,.1);font-size:12.5px;font-weight:600;padding:8px 13px;border-radius:999px">Gestão &amp; publicação</span>
+        <span style="background:rgba(255,248,236,.1);font-size:12.5px;font-weight:600;padding:8px 13px;border-radius:999px">Lista de espera</span>
+        <span style="background:rgba(255,248,236,.1);font-size:12.5px;font-weight:600;padding:8px 13px;border-radius:999px">Relatórios</span>
+      </div>
+    </div>
+
+    <!-- extras -->
+    <div data-rv style="text-align:center;margin:6px 0 18px"><div style="font-family:'Grand Hotel',cursive;font-size:28px;color:#08B3BB">Serviços extras disponíveis</div><p style="font-size:14px;color:#8A6F60;margin:2px 0 0">Soluções complementares para fortalecer o lançamento — contrate junto ou conforme a necessidade.</p></div>
+    <div data-rv style="display:grid;grid-template-columns:repeat(2,1fr);gap:18px">
+      <div style="background:#fff;border:1px solid #EFE2D2;border-radius:18px;padding:24px;box-shadow:0 10px 26px rgba(58,35,23,.06);display:flex;gap:16px">
+        <div style="flex:none;width:48px;height:48px;border-radius:13px;background:#FFE7EE;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="23" fill="none" stroke="#FC4C73" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M7 21h10"/></svg></div>
+        <div><div style="font-weight:800;font-size:17px;color:#3A2317">Site institucional ou landing page</div><p style="font-size:13.5px;line-height:1.55;color:#6B3F2B;margin:6px 0 0">Para apresentar o pet shop, serviços, localização, WhatsApp, lista de espera e informações da inauguração.</p></div>
+      </div>
+      <div style="background:#fff;border:1px solid #EFE2D2;border-radius:18px;padding:24px;box-shadow:0 10px 26px rgba(58,35,23,.06);display:flex;gap:16px">
+        <div style="flex:none;width:48px;height:48px;border-radius:13px;background:#E2F6F7;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="23" fill="none" stroke="#08B3BB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/><circle cx="12" cy="12" r="3.4"/></svg></div>
+        <div><div style="font-weight:800;font-size:17px;color:#3A2317">Automações simples</div><p style="font-size:13.5px;line-height:1.55;color:#6B3F2B;margin:6px 0 0">Fluxos para organização de leads, respostas iniciais, lista de interessados e direcionamento para atendimento.</p></div>
+      </div>
+      <div style="background:#fff;border:1px solid #EFE2D2;border-radius:18px;padding:24px;box-shadow:0 10px 26px rgba(58,35,23,.06);display:flex;gap:16px">
+        <div style="flex:none;width:48px;height:48px;border-radius:13px;background:#FFF3CF;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="23" fill="none" stroke="#9a7400" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg></div>
+        <div><div style="font-weight:800;font-size:17px;color:#3A2317">Planilhas estratégicas</div><p style="font-size:13.5px;line-height:1.55;color:#6B3F2B;margin:6px 0 0">Controle financeiro básico, controle de leads, calendário de conteúdo, acompanhamento de campanhas e organização de demandas.</p></div>
+      </div>
+      <div style="background:#fff;border:1px solid #EFE2D2;border-radius:18px;padding:24px;box-shadow:0 10px 26px rgba(58,35,23,.06);display:flex;gap:16px">
+        <div style="flex:none;width:48px;height:48px;border-radius:13px;background:#FBE4D4;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="23" fill="none" stroke="#C25A1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l15-6v14L3 13z"/><path d="M3 11v2a2 2 0 0 0 2 2h1"/><path d="M18 8a3 3 0 0 1 0 8"/></svg></div>
+        <div><div style="font-weight:800;font-size:17px;color:#3A2317">Campanhas de inauguração</div><p style="font-size:13.5px;line-height:1.55;color:#6B3F2B;margin:6px 0 0">Peças promocionais, estratégia de lançamento, contagem regressiva, anúncios, roteiro de stories e comunicação para a abertura oficial.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INVESTIMENTO ================= -->
+<section id="investimento" data-screen-label="Investimento" data-label="Investimento" style="position:relative;padding:74px 22px;background:#FFF8EC">
+  <div style="max-width:1120px;margin:0 auto">
+    <div data-rv style="text-align:center;margin-bottom:40px">
+      <div style="display:inline-flex;align-items:center;gap:12px;color:#08B3BB;font-size:12px;font-weight:800;letter-spacing:.24em;text-transform:uppercase"><span style="width:26px;height:1px;background:#C9962F"></span>Investimento<span style="width:26px;height:1px;background:#C9962F"></span></div>
+      <h2 style="font-family:'DM Serif Display',serif;font-size:46px;color:#3A2317;margin:12px 0 0;line-height:1.05">Dois caminhos para começar</h2>
+      <p style="max-width:640px;margin:14px auto 0;font-size:16.5px;line-height:1.6;color:#6B3F2B">Modelo <strong>pacote de lançamento (2 meses) + mensal recorrente</strong>, com <strong>setup dos perfis incluso</strong> (cortesia). Sem taxa de implantação.</p>
+    </div>
+
+    <div data-rv style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;margin-bottom:20px">
+      <!-- essencial -->
+      <div style="background:#fff;border:1px solid #EFE2D2;border-radius:22px;padding:30px;box-shadow:0 12px 30px rgba(58,35,23,.07)">
+        <div style="font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#0A8A90">Plano 1</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:30px;color:#3A2317;line-height:1;margin-top:3px">Lolla Essencial</div>
+        <p style="font-size:13px;line-height:1.45;color:#6B3F2B;margin:8px 0 16px">Presença consistente e profissional para construir audiência e lista de espera.</p>
+        <div style="display:flex;align-items:baseline;gap:6px"><span style="font-size:16px;color:#8A6F60">R$</span><span style="font-family:'DM Serif Display',serif;font-size:46px;color:#08B3BB;line-height:1">1.690</span><span style="font-size:14px;color:#8A6F60">/mês</span></div>
+        <div style="height:1px;background:#EFE2D2;margin:18px 0"></div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-size:13.5px;color:#3A2317;display:flex;gap:9px"><span style="color:#08B3BB;font-weight:800">✓</span>Planejamento + linha editorial mensal</div>
+          <div style="font-size:13.5px;color:#3A2317;display:flex;gap:9px"><span style="color:#08B3BB;font-weight:800">✓</span><strong>8 Reels</strong> + feed e stories diários</div>
+          <div style="font-size:13.5px;color:#3A2317;display:flex;gap:9px"><span style="color:#08B3BB;font-weight:800">✓</span>Design das artes no padrão da marca</div>
+          <div style="font-size:13.5px;color:#3A2317;display:flex;gap:9px"><span style="color:#08B3BB;font-weight:800">✓</span>Gestão Instagram + TikTok</div>
+          <div style="font-size:13.5px;color:#3A2317;display:flex;gap:9px"><span style="color:#08B3BB;font-weight:800">✓</span><strong>1 captação presencial/mês</strong> com a Lolla</div>
+          <div style="font-size:13.5px;color:#3A2317;display:flex;gap:9px"><span style="color:#08B3BB;font-weight:800">✓</span>Captação da lista de espera (WhatsApp + form)</div>
+          <div style="font-size:13.5px;color:#3A2317;display:flex;gap:9px"><span style="color:#08B3BB;font-weight:800">✓</span>Relatório mensal de resultados</div>
+        </div>
+      </div>
+      <!-- premium -->
+      <div style="background:#3A2317;border-radius:22px;padding:30px;color:#FFF8EC;position:relative;box-shadow:0 20px 40px rgba(58,35,23,.3)">
+        <div style="position:absolute;top:-13px;right:24px;background:#FEBD02;color:#3A2317;font-weight:800;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:6px 15px;border-radius:999px">Recomendado</div>
+        <div style="font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#FEBD02">Plano 2</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:30px;line-height:1;margin-top:3px">Lolla Premium</div>
+        <p style="font-size:13px;line-height:1.45;color:rgba(255,248,236,.78);margin:8px 0 16px">Crescimento acelerado com tráfego pago e produção reforçada para lotar a lista de espera.</p>
+        <div style="display:flex;align-items:baseline;gap:6px"><span style="font-size:16px;color:rgba(255,248,236,.7)">R$</span><span style="font-family:'DM Serif Display',serif;font-size:46px;color:#FC4C73;line-height:1">2.390</span><span style="font-size:14px;color:rgba(255,248,236,.7)">/mês</span></div>
+        <div style="height:1px;background:rgba(255,248,236,.15);margin:18px 0"></div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-size:13.5px;display:flex;gap:9px"><span style="color:#FEBD02;font-weight:800">★</span><strong>Tudo do Essencial</strong>, e mais:</div>
+          <div style="font-size:13.5px;display:flex;gap:9px"><span style="color:#FEBD02;font-weight:800">✓</span><strong>12 Reels</strong> por mês + roteiros</div>
+          <div style="font-size:13.5px;display:flex;gap:9px"><span style="color:#FEBD02;font-weight:800">✓</span><strong>Até 2 captações/mês</strong> (Lolla + obra)</div>
+          <div style="font-size:13.5px;display:flex;gap:9px"><span style="color:#FEBD02;font-weight:800">✓</span><strong>Gestão de tráfego pago</strong> no Instagram*</div>
+          <div style="font-size:13.5px;display:flex;gap:9px"><span style="color:#FEBD02;font-weight:800">✓</span>Stories estratégicos + prova social</div>
+          <div style="font-size:13.5px;display:flex;gap:9px"><span style="color:#FEBD02;font-weight:800">✓</span>Destaques e capas no padrão da marca</div>
+          <div style="font-size:13.5px;display:flex;gap:9px"><span style="color:#FEBD02;font-weight:800">✓</span>Relatório quinzenal + reunião mensal</div>
+          <div style="font-size:12px;color:rgba(255,248,236,.6);display:flex;gap:9px"><span>*</span>Verba de mídia por conta do cliente</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- add-ons -->
+    <div data-rv style="background:#FBF1DF;border:1px solid #EFE2D2;border-radius:20px;padding:26px 28px;margin-bottom:18px">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:6px">
+        <div style="font-family:'DM Serif Display',serif;font-size:22px;color:#3A2317">Serviços extras — valores avulsos</div>
+        <div style="font-size:12px;color:#8A6F60">projeto único · contrate junto ou à parte</div>
+      </div>
+      <p style="font-size:13px;color:#8A6F60;margin:0 0 16px">Valores a partir de (one-time), ajustáveis ao escopo final. Clientes do plano mensal têm condição especial.</p>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px">
+        <div class="sv-row" style="display:flex;align-items:center;justify-content:space-between;gap:14px;background:#fff;border:1px solid #EFE2D2;border-radius:13px;padding:14px 16px"><div style="font-weight:700;font-size:14px;color:#3A2317">Site institucional / landing page</div><div style="white-space:nowrap;font-family:'DM Serif Display',serif;font-size:19px;color:#08B3BB">R$ 1.200</div></div>
+        <div class="sv-row" style="display:flex;align-items:center;justify-content:space-between;gap:14px;background:#fff;border:1px solid #EFE2D2;border-radius:13px;padding:14px 16px"><div style="font-weight:700;font-size:14px;color:#3A2317">Automações simples</div><div style="white-space:nowrap;font-family:'DM Serif Display',serif;font-size:19px;color:#08B3BB">R$ 480</div></div>
+        <div class="sv-row" style="display:flex;align-items:center;justify-content:space-between;gap:14px;background:#fff;border:1px solid #EFE2D2;border-radius:13px;padding:14px 16px"><div style="font-weight:700;font-size:14px;color:#3A2317">Planilhas estratégicas</div><div style="white-space:nowrap;font-family:'DM Serif Display',serif;font-size:19px;color:#08B3BB">R$ 350</div></div>
+        <div class="sv-row" style="display:flex;align-items:center;justify-content:space-between;gap:14px;background:#fff;border:1px solid #EFE2D2;border-radius:13px;padding:14px 16px"><div style="font-weight:700;font-size:14px;color:#3A2317">Campanha de inauguração</div><div style="white-space:nowrap;font-family:'DM Serif Display',serif;font-size:19px;color:#08B3BB">R$ 690</div></div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;background:linear-gradient(135deg,#FC4C73,#ff6f90);border-radius:14px;padding:16px 20px;margin-top:12px;color:#fff">
+        <div><div style="font-weight:800;font-size:15px">Combo Lançamento Completo</div><div style="font-size:12.5px;opacity:.9">Os 4 extras juntos — economia de R$ 320</div></div>
+        <div style="white-space:nowrap;text-align:right"><span style="text-decoration:line-through;opacity:.7;font-size:13px;margin-right:6px">R$ 2.720</span><span style="font-family:'DM Serif Display',serif;font-size:24px">R$ 2.400</span></div>
+      </div>
+    </div>
+
+    <!-- observações + assinatura -->
+    <div data-rv style="display:grid;grid-template-columns:1.5fr 1fr;gap:18px;align-items:stretch">
+      <div style="background:#fff;border:1px solid #EFE2D2;border-radius:16px;padding:20px 22px;font-size:12.5px;line-height:1.6;color:#8A6F60">
+        <strong style="color:#6B3F2B">Condições:</strong> pagamento mensal via PIX/transferência até o 5º dia útil; 1º mês na assinatura. Pacote de lançamento de 2 meses, renovando como mensal recorrente; início em até 2 semanas após o aceite. Tráfego pago (Premium): verba por conta do cliente (sugestão R$ 450–900/mês). Captação presencial em Natal; deslocamento fora da Grande Natal à parte. Revisões: até 2 rodadas por peça. Valores válidos por 15 dias.
+      </div>
+      <div style="background:#FBF1DF;border:1px solid #E7D3AE;border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
+        <img src="assets/sacha-farias-logo.jpg" alt="Sacha Farias Designer" style="width:170px;border-radius:10px">
+        <div style="font-size:11px;color:#8A6F60;margin-top:8px">Proposta elaborada por<br><strong style="color:#3A2317">Sacha Farias Designer</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTATO ================= -->
+<section id="contato" data-screen-label="Contato" data-label="Contato" style="position:relative;padding:78px 22px 64px;background:#2A1810;overflow:hidden">
+  <svg viewBox="0 0 32 29" style="position:absolute;left:60px;top:60px;width:90px;color:rgba(252,76,115,.08)" fill="currentColor"><path d="M16 29S0 18 0 8A8 8 0 0 1 16 6 8 8 0 0 1 32 8c0 10-16 21-16 21Z"/></svg>
+  <div style="max-width:980px;margin:0 auto;position:relative;text-align:center">
+    <div data-rv>
+      <div style="display:inline-flex;align-items:center;gap:12px;color:#FEBD02;font-size:12px;font-weight:800;letter-spacing:.24em;text-transform:uppercase"><span style="width:26px;height:1px;background:#C9962F"></span>Próximos passos<span style="width:26px;height:1px;background:#C9962F"></span></div>
+      <h2 style="font-family:'DM Serif Display',serif;font-size:46px;color:#FFF8EC;margin:12px 0 0;line-height:1.06">Vamos começar essa história?</h2>
+      <p style="max-width:580px;margin:14px auto 0;font-size:16.5px;line-height:1.6;color:rgba(255,248,236,.74)">Quatro passos simples e os perfis da Lolla entram no ar em até duas semanas.</p>
+    </div>
+
+    <div data-rv style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:34px 0 36px">
+      <div style="background:rgba(255,248,236,.05);border:1px solid rgba(255,248,236,.12);border-radius:16px;padding:20px 16px"><div style="font-family:'DM Serif Display',serif;font-size:26px;color:#FC4C73">1</div><p style="font-size:12.5px;line-height:1.45;color:rgba(255,248,236,.82);margin:6px 0 0">Escolha do plano (Essencial ou Premium)</p></div>
+      <div style="background:rgba(255,248,236,.05);border:1px solid rgba(255,248,236,.12);border-radius:16px;padding:20px 16px"><div style="font-family:'DM Serif Display',serif;font-size:26px;color:#08B3BB">2</div><p style="font-size:12.5px;line-height:1.45;color:rgba(255,248,236,.82);margin:6px 0 0">Assinatura do contrato e 1º pagamento</p></div>
+      <div style="background:rgba(255,248,236,.05);border:1px solid rgba(255,248,236,.12);border-radius:16px;padding:20px 16px"><div style="font-family:'DM Serif Display',serif;font-size:26px;color:#FEBD02">3</div><p style="font-size:12.5px;line-height:1.45;color:rgba(255,248,236,.82);margin:6px 0 0">Reunião de briefing e 1ª captação</p></div>
+      <div style="background:rgba(255,248,236,.05);border:1px solid rgba(255,248,236,.12);border-radius:16px;padding:20px 16px"><div style="font-family:'DM Serif Display',serif;font-size:26px;color:#FFF8EC">4</div><p style="font-size:12.5px;line-height:1.45;color:rgba(255,248,236,.82);margin:6px 0 0">Perfis no ar em até 2 semanas</p></div>
+    </div>
+
+    <div data-rv>
+      <a href="https://wa.me/5583998090871" target="_blank" rel="noopener" class="pbtn" style="display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;font-size:16px;font-weight:800;padding:16px 30px;border-radius:999px;box-shadow:0 16px 32px rgba(37,211,102,.32)">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15l-1.4 5 5.1-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.5-2.6-1.1-4.3-3.7-4.4-3.9-.1-.2-1-1.4-1-2.6 0-1.2.6-1.8.9-2 .2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.3 0 .5l-.4.6c-.2.2-.3.4-.1.7.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.2.1.4 0 .6Z"/></svg>
+        Falar no WhatsApp
+      </a>
+      <div style="font-size:13.5px;color:rgba(255,248,236,.72);margin-top:12px;font-weight:600">(83) 9 9809-0871</div>
+    </div>
+
+    <div data-rv style="margin-top:48px;padding-top:30px;border-top:1px solid rgba(255,248,236,.12);display:flex;align-items:center;justify-content:center;gap:30px;flex-wrap:wrap">
+      <img src="assets/lolla-logo.png" alt="Lolla Potiguar" style="width:64px;height:64px;object-fit:contain">
+      <div style="width:1px;height:54px;background:rgba(255,248,236,.16)"></div>
+      <div style="background:#FFF8EC;border-radius:12px;padding:10px 14px"><img src="assets/sacha-farias-logo.jpg" alt="Sacha Farias Designer" style="height:54px"></div>
+    </div>
+    <div data-rv style="font-size:12.5px;color:rgba(255,248,236,.5);margin-top:20px">Lolla Potiguar Pet Shop · Natal/RN — Apresentação de projeto por <strong style="color:rgba(255,248,236,.7)">Sacha Farias Designer</strong> · 2026</div>
+  </div>
+</section>
+
+<div aria-hidden="true" style="position:fixed;inset:0;z-index:55;pointer-events:none;opacity:.085;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='240'%3E%3Ctext x='10' y='130' transform='rotate(-28 180 120)' font-family='Arial,sans-serif' font-size='17' font-weight='700' fill='%23C9962F'%3ESACHA FARIAS DESIGNER%3C/text%3E%3C/svg%3E&quot;);background-size:360px 240px"></div>
+
+<template id="__bundler_thumbnail">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <rect width="100" height="100" fill="#2A1810"/>
+    <g fill="#FEBD02"><ellipse cx="50" cy="62" rx="15" ry="12"/><ellipse cx="31" cy="44" rx="6.5" ry="8"/><ellipse cx="43" cy="34" rx="6.5" ry="8"/><ellipse cx="57" cy="34" rx="6.5" ry="8"/><ellipse cx="69" cy="44" rx="6.5" ry="8"/></g>
+    <path d="M50 86s-9-6-9-12a4.6 4.6 0 0 1 9-1.2 4.6 4.6 0 0 1 9 1.2c0 6-9 12-9 12Z" fill="#FC4C73"/>
+  </svg>
+</template>
+
+<!-- ================= LIGHTBOX ================= -->
+<sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
+  <div class="lb-fade" onClick="{{ lbClose }}" style="position:fixed;inset:0;z-index:90;background:rgba(20,12,7,.92);display:flex;align-items:center;justify-content:center;padding:30px;cursor:zoom-out">
+    <button onClick="{{ lbPrevStop }}" class="pbtn" style="position:fixed;left:18px;top:50%;transform:translateY(-50%);width:54px;height:54px;border-radius:50%;border:1px solid rgba(255,248,236,.25);background:rgba(255,248,236,.08);color:#FFF8EC;font-size:24px;cursor:pointer;z-index:92">‹</button>
+    <button onClick="{{ lbNextStop }}" class="pbtn" style="position:fixed;right:18px;top:50%;transform:translateY(-50%);width:54px;height:54px;border-radius:50%;border:1px solid rgba(255,248,236,.25);background:rgba(255,248,236,.08);color:#FFF8EC;font-size:24px;cursor:pointer;z-index:92">›</button>
+    <button onClick="{{ lbClose }}" style="position:fixed;top:20px;right:22px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,248,236,.25);background:rgba(255,248,236,.08);color:#FFF8EC;font-size:20px;cursor:pointer;z-index:92">✕</button>
+    <div class="wm" style="display:inline-block;line-height:0;border-radius:12px"><img src="{{ lbSrc }}" style="max-width:92vw;max-height:86vh;border-radius:12px;box-shadow:0 30px 70px rgba(0,0,0,.6)"></div>
+    <div style="position:fixed;bottom:22px;left:0;right:0;text-align:center;color:rgba(255,248,236,.8);font-size:13px;font-weight:600">{{ lbCounter }}</div>
+  </div>
+</sc-if>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { lb: { open: false, group: null, i: 0 } };
+
+  groups = {
+    car: ['car-1','car-2','car-3','car-4','car-5','car-6'],
+    brief: ['brief-1','brief-2','brief-3','brief-4','brief-5','brief-6'],
+    man: ['man-1','man-2','man-3','man-4','man-5','man-6']
+  };
+  base = 'assets/arte/';
+
+  openLb(group, i) {
+    const arr = this.groups[group]; if (!arr) return;
+    this.setState({ lb: { open: true, group, i: ((i % arr.length) + arr.length) % arr.length } });
+  }
+  closeLb() { this.setState({ lb: { open: false, group: null, i: 0 } }); }
+  stepLb(d) {
+    this.setState(s => {
+      if (!s.lb.open) return null;
+      const arr = this.groups[s.lb.group];
+      return { lb: { ...s.lb, i: ((s.lb.i + d) % arr.length + arr.length) % arr.length } };
+    });
+  }
+
+  componentDidMount() {
+    // reveal + counters
+    const io = new IntersectionObserver((ents) => {
+      ents.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('rv-in');
+        if (e.target.dataset && e.target.dataset.count != null) this.animateCount(e.target);
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.14 });
+    document.querySelectorAll('[data-rv],[data-count]').forEach(el => io.observe(el));
+
+    // nav smooth scroll
+    document.querySelectorAll('[data-nav]').forEach(a => {
+      a.addEventListener('click', (ev) => {
+        ev.preventDefault();
+        const t = document.getElementById(a.dataset.nav);
+        if (t) window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 62, behavior: 'smooth' });
+      });
+    });
+
+    // nav active highlight
+    const navLinks = [...document.querySelectorAll('.nav-link[data-nav]')];
+    const secs = navLinks.map(a => document.getElementById(a.dataset.nav)).filter(Boolean);
+    const onScroll = () => {
+      const y = window.scrollY + 90;
+      let active = null;
+      secs.forEach(s => { if (s.offsetTop <= y) active = s.id; });
+      navLinks.forEach(a => a.classList.toggle('nav-on', a.dataset.nav === active));
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // carousels
+    document.querySelectorAll('[data-car]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const track = document.getElementById('car-' + btn.dataset.car);
+        if (!track) return;
+        const dir = parseInt(btn.dataset.dir, 10) || 1;
+        const card = track.querySelector('.gcard');
+        const step = card ? card.offsetWidth + 18 : 286;
+        track.scrollBy({ left: dir * step * 2, behavior: 'smooth' });
+      });
+    });
+
+    // gallery lightbox (delegated)
+    document.addEventListener('click', this._lbHandler = (ev) => {
+      const card = ev.target.closest && ev.target.closest('[data-lb]');
+      if (!card) return;
+      this.openLb(card.dataset.lb, parseInt(card.dataset.i, 10) || 0);
+    });
+
+    // watermark + content protection
+    document.querySelectorAll('[data-lb]').forEach(c => c.classList.add('wm'));
+    document.querySelectorAll('img').forEach(im => { im.setAttribute('draggable', 'false'); im.addEventListener('dragstart', e => e.preventDefault()); });
+    document.addEventListener('contextmenu', this._ctxHandler = (ev) => { ev.preventDefault(); });
+
+    // keyboard
+    document.addEventListener('keydown', this._keyHandler = (ev) => {
+      if (!this.state.lb.open) return;
+      if (ev.key === 'Escape') this.closeLb();
+      else if (ev.key === 'ArrowRight') this.stepLb(1);
+      else if (ev.key === 'ArrowLeft') this.stepLb(-1);
+    });
+  }
+
+  animateCount(el) {
+    const target = parseFloat(el.dataset.count) || 0;
+    const suffix = el.dataset.suffix || '';
+    const dur = 1100, t0 = performance.now();
+    const tick = (now) => {
+      const p = Math.min(1, (now - t0) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased) + (p === 1 ? suffix : '');
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  renderVals() {
+    const lb = this.state.lb;
+    const arr = lb.open ? this.groups[lb.group] : null;
+    return {
+      lbOpen: lb.open,
+      lbSrc: arr ? this.base + arr[lb.i] + '.jpg' : '',
+      lbCounter: arr ? (lb.i + 1) + ' / ' + arr.length : '',
+      lbClose: () => this.closeLb(),
+      lbNextStop: (e) => { if (e && e.stopPropagation) e.stopPropagation(); this.stepLb(1); },
+      lbPrevStop: (e) => { if (e && e.stopPropagation) e.stopPropagation(); this.stepLb(-1); }
+    };
+  }
+}
+</script>
+</body>
+</html>
