@@ -39,6 +39,25 @@
   .wm{position:relative}
   .wm::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Ctext x='8' y='118' transform='rotate(-28 150 100)' font-family='Arial,sans-serif' font-size='15.5' font-weight='700' fill='%23000' fill-opacity='0.6'%3ESACHA FARIAS DESIGNER · AMOSTRA%3C/text%3E%3C/svg%3E");background-size:300px 200px;opacity:.22;mix-blend-mode:multiply;border-radius:inherit;z-index:5}
   img{-webkit-user-drag:none;user-select:none}
+  @media (max-width:820px){
+    nav .nav-link{display:none !important}
+    nav > div{padding:9px 16px !important}
+    [style*="display:grid"]{grid-template-columns:1fr !important}
+    [style*="font-size:72px"]{font-size:39px !important;line-height:1.06 !important}
+    [style*="font-size:46px"]{font-size:29px !important}
+    [style*="font-size:34px"]{font-size:25px !important}
+    [style*="font-size:32px"]{font-size:24px !important}
+    [style*="font-size:27px"]{font-size:21px !important;line-height:1.35 !important}
+    [style*="padding:62px 56px 56px"]{padding:36px 18px !important}
+    [style*="padding:32px 36px"]{padding:22px 18px !important}
+    [style*="padding:34px 38px"]{padding:22px 18px !important}
+    [style*="padding:30px 38px"]{padding:22px 18px !important}
+    section[style*="padding:74px 22px"]{padding:52px 16px !important}
+    section[style*="padding:78px 22px"]{padding:52px 16px !important}
+    section[style*="padding:78px 22px 64px"]{padding:52px 16px 48px !important}
+    [style*="width:184px;height:184px"]{width:138px !important;height:138px !important}
+    [style*="margin:26px auto 6px;width:184px"]{width:138px !important}
+  }
 </style>
 </helmet>
 
@@ -441,9 +460,9 @@
       <div style="background:#fff;border:1px solid #EFE2D2;border-radius:16px;padding:20px 22px;font-size:12.5px;line-height:1.6;color:#8A6F60">
         <strong style="color:#6B3F2B">Condições:</strong> pagamento mensal via PIX/transferência até o 5º dia útil; 1º mês na assinatura. Pacote de lançamento de 2 meses, renovando como mensal recorrente; início em até 2 semanas após o aceite. Tráfego pago (Premium): verba por conta do cliente (sugestão R$ 450–900/mês). Captação presencial em Natal; deslocamento fora da Grande Natal à parte. Revisões: até 2 rodadas por peça. Valores válidos por 15 dias.
       </div>
-      <div style="background:#FBF1DF;border:1px solid #E7D3AE;border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
-        <img src="assets/sacha-farias-logo.jpg" alt="Sacha Farias Designer" style="width:170px;border-radius:10px">
-        <div style="font-size:11px;color:#8A6F60;margin-top:8px">Proposta elaborada por<br><strong style="color:#3A2317">Sacha Farias Designer</strong></div>
+      <div style="background:#fff;border:1px solid #E7D3AE;border-radius:16px;padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
+        <img src="assets/sacha-farias-logo.png" alt="Sacha Farias Designer" style="width:210px;object-fit:contain">
+        <div style="font-size:11px;color:#8A6F60;margin-top:6px">Proposta elaborada por<br><strong style="color:#3A2317">Sacha Farias Designer</strong></div>
       </div>
     </div>
   </div>
@@ -474,10 +493,12 @@
       <div style="font-size:13.5px;color:rgba(255,248,236,.72);margin-top:12px;font-weight:600">(83) 9 9809-0871</div>
     </div>
 
-    <div data-rv style="margin-top:48px;padding-top:30px;border-top:1px solid rgba(255,248,236,.12);display:flex;align-items:center;justify-content:center;gap:30px;flex-wrap:wrap">
-      <img src="assets/lolla-logo.png" alt="Lolla Potiguar" style="width:64px;height:64px;object-fit:contain">
-      <div style="width:1px;height:54px;background:rgba(255,248,236,.16)"></div>
-      <div style="background:#FFF8EC;border-radius:12px;padding:10px 14px"><img src="assets/sacha-farias-logo.jpg" alt="Sacha Farias Designer" style="height:54px"></div>
+    <div data-rv style="margin-top:46px;display:flex;justify-content:center">
+      <div style="background:#FFF8EC;border:1px solid #E7D3AE;border-radius:22px;padding:24px 38px;display:flex;align-items:center;justify-content:center;gap:34px;flex-wrap:wrap;box-shadow:0 20px 44px rgba(0,0,0,.34)">
+        <img src="assets/lolla-logo.png" alt="Lolla Potiguar" style="width:110px;height:110px;object-fit:contain">
+        <div style="width:1px;height:78px;background:#E7D3AE"></div>
+        <img src="assets/sacha-farias-logo.png" alt="Sacha Farias Designer" style="height:104px;object-fit:contain">
+      </div>
     </div>
     <div data-rv style="font-size:12.5px;color:rgba(255,248,236,.5);margin-top:20px">Lolla Potiguar Pet Shop · Natal/RN — Apresentação de projeto por <strong style="color:rgba(255,248,236,.7)">Sacha Farias Designer</strong> · 2026</div>
   </div>
@@ -579,6 +600,11 @@ class Component extends DCLogic {
       const card = ev.target.closest && ev.target.closest('[data-lb]');
       if (!card) return;
       this.openLb(card.dataset.lb, parseInt(card.dataset.i, 10) || 0);
+    });
+
+    // uniform gallery sizing (landscape pages → equal 4:3 cards)
+    document.querySelectorAll('#galeria [data-lb="brief"] img, #galeria [data-lb="man"] img').forEach(im => {
+      im.style.width = '100%'; im.style.aspectRatio = '4 / 3'; im.style.objectFit = 'contain'; im.style.background = '#FFF8EC';
     });
 
     // watermark + content protection
